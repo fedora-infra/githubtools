@@ -1,0 +1,14 @@
+*~
+*.pyc
+*.pyo
+*.swp
+*.mo 
+*.cfg
+dist
+*.egg-info
+build
+.project
+.pydevproject
+.coverage
+_build/
+pylint.out
