@@ -43,7 +43,9 @@ env.filters['titlesub'] = titlesub
 
 # Get your own token here:  https://github.com/settings/applications
 token = os.environ.get('GH_OAUTH_TOKEN')
-template = 'template.html'
+template = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'template.html')
 repos = gh.get_repos('fedora-infra', token)
 
 
@@ -69,7 +71,9 @@ html = mytemplate.render(
 
 
 # Write down the page
-stream = open('index.html', 'w')
+stream = open(os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'index.html'), 'w')
 stream.write(html)
 stream.close()
 
