@@ -32,12 +32,11 @@
 {% for project in projects | sort %}
 
 {{ project }}
-{{ project | titlesub }}
-  {% for pull in projects[project] %}
-   *  <a href="pull['issue_url']"> {{ pull['title'] }} </a>
-  {% endfor %}
+{{ project | titlesub }} {% for pull in projects[project] %}
+   *  <a href="pull['issue_url']"> {{ pull['title'] }} </a>{% endfor %}
 {% endfor %}
 
 
+Generated on: {{ date }}
 </body>
 </html>
