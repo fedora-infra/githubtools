@@ -33,7 +33,7 @@
 
 {{ project }}
 {{ project | titlesub }} {% for pull in projects[project] %}
-   *  <a href="pull['issue_url']"> {{ pull['title'] }} </a>{% endfor %}
+   *  <a href="{{ pull['issue_url'] }}" target="_blank"> {{ pull['title'] }} </a>{% endfor %}
 {% endfor %}
 
 
