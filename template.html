@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon"
+        href="//fedoraproject.org/static/images/favicon.ico"/>
+    <style type="text/css">
+    html {
+       min-width: 800px;
+    }
+    body {
+        margin:auto;
+        min-width: 750px;
+        max-width:1100px;
+        white-space: pre;
+        font-family: monospace;
+        display: block;
+    }
+    </style>
+    <title>Fedora-infra - Pending pull-requests</title>
+</head>
+<body>
+
+  __         _                        _        __
+ / _|       | |                      (_)      / _|
+| |_ ___  __| | ___  _ __ __ _        _ _ __ | |_ _ __ __ _
+|  _/ _ \/ _` |/ _ \| '__/ _` | ____ | | '_ \|  _| '__/ _` |
+| ||  __/ (_| | (_) | | | (_| |      | | | | | | | | | (_| |
+|_| \___|\__,_|\___/|_|  \__,_|      |_|_| |_|_| |_|  \__,_|
+
+
+{% for project in projects | sort %}
+
+{{ project }}
+{{ project | titlesub }}
+
+  {% for pull in projects[project] %}
+   *  <a href="pull['issue_url']"> {{ pull['title'] }} </a>
+  {% endfor %}
+
+{% endfor %}
+
+
+</body>
+</html>
