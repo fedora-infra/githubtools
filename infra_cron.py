@@ -50,7 +50,8 @@ repos = gh.get_repos('fedora-infra', token)
 output = {}
 for repo in repos:
     pulls = gh.get_pulls('fedora-infra', repo['name'], token)
-    output[repo['name']] = pulls
+    if pulls:
+        output[repo['name']] = pulls
 
 
 # Read in template
