@@ -33,11 +33,9 @@
 
 {{ project }}
 {{ project | titlesub }}
-
   {% for pull in projects[project] %}
    *  <a href="pull['issue_url']"> {{ pull['title'] }} </a>
   {% endfor %}
-
 {% endfor %}
 
 
