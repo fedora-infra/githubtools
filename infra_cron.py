@@ -30,16 +30,32 @@ run it as:
 import datetime
 import os
 
+from dateutil import tz
+from dateutil.parser import parse
 from jinja2 import Environment
 
 import githubutils as gh
 
+env = Environment()
+
+
 def titlesub(title_str):
+    """ Returns the underline line for a title. """
     return '=' * len(title_str)
 
-env = Environment()
+
 env.filters['titlesub'] = titlesub
 
+
+def ago(date):
+    """ Returns how long ago was this date. """
+    delta = datetime.datetime.now(tz.tzutc()) - date
+    hours, remainder = divmod(delta.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return '%s:%s:%s ago' % (hours, minutes, seconds)
+
+
+env.filters['ago'] = ago
 
 # Get your own token here:  https://github.com/settings/applications
 token = os.environ.get('GH_OAUTH_TOKEN')
@@ -51,7 +67,14 @@ repos = gh.get_repos('fedora-infra', token)
 
 output = {}
 for repo in repos:
-    pulls = gh.get_pulls('fedora-infra', repo['name'], token)
+    pulls = []
+    for pull in gh.get_pulls('fedora-infra', repo['name'], token):
+        pull['comments'] = gh.get_comments('fedora-infra', repo['name'],
+                                            pull['number'], token)
+        pull['created_at'] = parse(pull['created_at'])
+        if 'updated_at' in pull:
+            pull['updated_at'] = parse(pull['updated_at'])
+        pulls.append(pull)
     if pulls:
         output[repo['name']] = pulls
 
