@@ -89,7 +89,7 @@ stream.close()
 mytemplate = env.from_string(tplfile)
 html = mytemplate.render(
     projects=output,
-    date=datetime.datetime.now().strftime("%a %b %d %Y %H:%M")
+    date=datetime.datetime.utcnow().strftime("%a %b %d %Y %H:%M")
 )
 
 
