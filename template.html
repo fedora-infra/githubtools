@@ -35,8 +35,8 @@
 {{ project | titlesub }} {% for pull in projects[project] %}
    * <a href="{{ pull['issue_url'] }}" target="_blank">{{ pull['title'] }}</a>
          by {{ pull['user']['login'] }} -- {{ pull['comments'] | length
-         }} comments -- Last update on {{ pull['updated_at'].strftime('%Y-%m-%d  %H:%M') }} - {{
-         pull['updated_at'] | ago }} {%endfor %}
+         }} comments -- Last update on {{ pull['updated_at'].strftime('%Y-%m-%d %H:%M')
+         }} - {{  pull['updated_at'].humanize() }} {%endfor %}
 {% endfor %}
 
 

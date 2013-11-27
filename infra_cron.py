@@ -30,6 +30,7 @@ run it as:
 import datetime
 import os
 
+import arrow
 from dateutil import tz
 from dateutil.parser import parse
 from jinja2 import Environment
@@ -71,9 +72,9 @@ for repo in repos:
     for pull in gh.get_pulls('fedora-infra', repo['name'], token):
         pull['comments'] = gh.get_comments('fedora-infra', repo['name'],
                                             pull['number'], token)
-        pull['created_at'] = parse(pull['created_at'])
+        pull['created_at'] = arrow.get(pull['created_at'])
         if 'updated_at' in pull:
-            pull['updated_at'] = parse(pull['updated_at'])
+            pull['updated_at'] = arrow.get(pull['updated_at'])
         pulls.append(pull)
     if pulls:
         output[repo['name']] = pulls
