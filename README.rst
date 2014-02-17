@@ -11,5 +11,6 @@ page presenting all the pull-requests opened in the
 License
 -------
 
-The code present in this project is licensed under the GPL v2 or any later
+The code present in this project is licensed under the
+`GPL v2 <http://www.gnu.org/licenses/gpl-2.0.html>`_ or any later
 version.
