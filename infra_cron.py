@@ -67,6 +67,7 @@ repos = gh.get_repos('fedora-infra', token)
 
 
 output = {}
+total = 0
 for repo in repos:
     pulls = []
     for pull in gh.get_pulls('fedora-infra', repo['name'], token):
@@ -78,6 +79,7 @@ for repo in repos:
         pulls.append(pull)
     if pulls:
         output[repo['name']] = pulls
+        total += len(pulls)
 
 
 # Read in template
@@ -90,6 +92,7 @@ stream.close()
 mytemplate = env.from_string(tplfile)
 html = mytemplate.render(
     projects=output,
+    total=total,
     date=datetime.datetime.utcnow().strftime("%a %b %d %Y %H:%M")
 )
 
