@@ -6,7 +6,7 @@ github.
 
 Among other is the `fedora-infra <http://ambre.pingoured.fr/fedora-infra/>`_
 page presenting all the pull-requests opened in the
-`fedora-infra organisation <https://github.com/fedora-infra/>`_ on github.
+`fedora-infra organization <https://github.com/fedora-infra/>`_ on github.
 
 License
 -------
