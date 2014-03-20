@@ -42,6 +42,7 @@ import githubutils as gh
 env = Environment()
 logging.basicConfig()
 LOG = logging.getLogger("pkgdb")
+
 if '--debug' in sys.argv:
     log.setLevel(logging.DEBUG)
 
@@ -86,7 +87,7 @@ for repo in repos:
     for pull in gh.get_pulls('fedora-infra', repo['name'], token):
         LOG.info('Query repo pr: %s/%s', repo['name'], pull['number'])
         pull['comments'] = gh.get_comments('fedora-infra', repo['name'],
-                                            pull['number'], token)
+                                           pull['number'], token)
         pull['created_at'] = arrow.get(pull['created_at'])
         if 'updated_at' in pull:
             pull['updated_at'] = arrow.get(pull['updated_at'])
@@ -117,4 +118,3 @@ stream = open(os.path.join(
     'index.html'), 'w')
 stream.write(html)
 stream.close()
-
