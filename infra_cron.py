@@ -28,7 +28,9 @@ run it as:
 """
 
 import datetime
+import logging
 import os
+import sys
 
 import arrow
 from dateutil import tz
@@ -38,6 +40,16 @@ from jinja2 import Environment
 import githubutils as gh
 
 env = Environment()
+logging.basicConfig()
+LOG = logging.getLogger("pkgdb")
+LOG.setLevel(logging.INFO)
+if '--debug' in sys.argv:
+    log.setLevel(logging.DEBUG)
+
+if '-h' or '--help' in sys.argv:
+    print 'Run the command alone or with --debug for more information about '\
+        'what\'s going on'
+    sys.exit()
 
 
 def titlesub(title_str):
@@ -63,14 +75,17 @@ token = os.environ.get('GH_OAUTH_TOKEN')
 template = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     'template.html')
+LOG.info('Retrieve fedora-infra repo list')
 repos = gh.get_repos('fedora-infra', token)
 
 
 output = {}
 total = 0
 for repo in repos:
+    LOG.info('Query repo: %s', repo['name'])
     pulls = []
     for pull in gh.get_pulls('fedora-infra', repo['name'], token):
+        LOG.info('Query repo pr: %s/%s', repo['name'], pull['number'])
         pull['comments'] = gh.get_comments('fedora-infra', repo['name'],
                                             pull['number'], token)
         pull['created_at'] = arrow.get(pull['created_at'])
