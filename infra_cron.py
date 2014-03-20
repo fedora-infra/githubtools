@@ -42,7 +42,6 @@ import githubutils as gh
 env = Environment()
 logging.basicConfig()
 LOG = logging.getLogger("pkgdb")
-LOG.setLevel(logging.INFO)
 if '--debug' in sys.argv:
     log.setLevel(logging.DEBUG)
 
