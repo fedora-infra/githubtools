@@ -46,7 +46,7 @@ LOG.setLevel(logging.INFO)
 if '--debug' in sys.argv:
     log.setLevel(logging.DEBUG)
 
-if '-h' or '--help' in sys.argv:
+if '-h' in sys.argv or '--help' in sys.argv:
     print 'Run the command alone or with --debug for more information about '\
         'what\'s going on'
     sys.exit()
