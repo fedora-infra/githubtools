@@ -116,5 +116,6 @@ html = mytemplate.render(
 stream = open(os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     'index.html'), 'w')
-stream.write(html)
+stream.write(html.encode('utf-8'))
 stream.close()
+
